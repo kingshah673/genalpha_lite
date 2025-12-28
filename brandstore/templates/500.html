@@ -1,0 +1,14 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+  Server Error | BrandStore
+{% endblock %}
+
+{% block content %}
+  <div class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
+    <h1 class="text-6xl font-bold text-red-600 mb-4">500</h1>
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">Internal Server Error</h2>
+    <p class="text-lg text-gray-600 mb-8 max-w-md">Something went wrong on our end. Please try again later.</p>
+    <a href="/" class="btn-primary">Return Home</a>
+  </div>
+{% endblock %}

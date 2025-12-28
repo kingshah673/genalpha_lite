@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn-primary {
+        @apply px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors duration-200 font-medium;
+    }
+    
+    .btn-secondary {
+        @apply px-6 py-2 bg-white text-black border border-black rounded-md hover:bg-gray-50 transition-colors duration-200 font-medium;
+    }
+    
+    .container-custom {
+        @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    }
+}

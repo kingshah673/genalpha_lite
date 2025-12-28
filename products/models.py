@@ -1,13 +1,20 @@
 from django.db import models
 from django.utils.text import slugify
 from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError
+
+def validate_image_size(image):
+    file_size = image.size
+    limit_mb = 5
+    if file_size > limit_mb * 1024 * 1024:
+        raise ValidationError(f"Max size of file is {limit_mb} MB")
 
 
 class Category(models.Model):
     """Product category model"""
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    image = models.ImageField(upload_to='categories/', blank=True, null=True)
+    image = models.ImageField(upload_to='categories/', blank=True, null=True, validators=[validate_image_size])
     description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
     order = models.PositiveIntegerField(default=0, db_index=True)
@@ -91,7 +98,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     """Product image model - supports multiple images per product"""
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='products/')
+    image = models.ImageField(upload_to='products/', validators=[validate_image_size])
     alt_text = models.CharField(max_length=255, blank=True)
     is_primary = models.BooleanField(default=False, help_text="Main image for product card")
     order = models.PositiveIntegerField(default=0)

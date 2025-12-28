@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+  Returns Policy - BrandStore
+{% endblock %}
+
+{% block content %}
+  <div class="bg-white px-6 py-32 lg:px-8">
+    <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+      <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Returns & Exchanges</h1>
+      <p class="mt-6 text-xl leading-8">We want you to love what you ordered. If something isn't right, let us know.</p>
+
+      <div class="mt-10 max-w-2xl">
+        <h2 class="text-2xl font-bold tracking-tight text-gray-900">Easy 30-Day Returns</h2>
+        <p class="mt-6">You have 30 days from the shipping date to return your purchase. Items must be unworn, unwashed, and with original tags attached.</p>
+
+        <h2 class="mt-16 text-2xl font-bold tracking-tight text-gray-900">How to Return</h2>
+        <ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600">
+          <li class="flex gap-x-3">
+            <span class="font-semibold text-gray-900">1.</span>
+            <span>Contact our support team to initiate a return.</span>
+          </li>
+          <li class="flex gap-x-3">
+            <span class="font-semibold text-gray-900">2.</span>
+            <span>Pack your items securely in the original packaging.</span>
+          </li>
+          <li class="flex gap-x-3">
+            <span class="font-semibold text-gray-900">3.</span>
+            <span>Ship the package to our returns center using the provided label.</span>
+          </li>
+        </ul>
+
+        <h2 class="mt-16 text-2xl font-bold tracking-tight text-gray-900">Refunds</h2>
+        <p class="mt-6">Once we receive your return, we will inspect the items and process your refund within 5-7 business days. The refund will be issued to the original payment method.</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -18,6 +18,36 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.sitemaps.views import sitemap
+from django.views.generic.base import TemplateView
+from products.sitemaps import ProductSitemap, CategorySitemap
+from core.sitemaps import StaticViewSitemap
+
+sitemaps = {
+    'products': ProductSitemap,
+    'categories': CategorySitemap,
+    'static': StaticViewSitemap,
+}
+
+from core.views import robots_txt
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path('admin/', admin.site.urls),
+    path('', include('core.urls')),
+    path('shop/', include('products.urls')),
+    path('cart/', include('cart.urls')),
+    path('orders/', include('orders.urls')),
+    path('', include('pages.urls')),
+    
+    # SEO
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt', robots_txt),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

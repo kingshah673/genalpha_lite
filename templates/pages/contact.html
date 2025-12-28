@@ -1,0 +1,64 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+  Contact Us - BrandStore
+{% endblock %}
+
+{% block content %}
+  <div class="bg-white py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl space-y-16 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-16 lg:max-w-none lg:grid-cols-3">
+        <div>
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900">Get in touch</h2>
+          <p class="mt-4 leading-7 text-gray-600">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+
+          <dl class="mt-8 space-y-4">
+            <div class="flex gap-x-4">
+              <dt class="flex-none">
+                <span class="sr-only">Email</span>
+                <svg class="h-7 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+              </dt>
+              <dd><a class="hover:text-gray-900" href="mailto:support@brandstore.com">support@brandstore.com</a></dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="lg:col-span-2">
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+              <div>
+                <label for="first-name" class="block text-sm font-semibold leading-6 text-gray-900">First name</label>
+                <div class="mt-2.5">
+                  <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+                </div>
+              </div>
+              <div>
+                <label for="last-name" class="block text-sm font-semibold leading-6 text-gray-900">Last name</label>
+                <div class="mt-2.5">
+                  <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+                </div>
+              </div>
+              <div class="sm:col-span-2">
+                <label for="email" class="block text-sm font-semibold leading-6 text-gray-900">Email</label>
+                <div class="mt-2.5">
+                  <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+                </div>
+              </div>
+              <div class="sm:col-span-2">
+                <label for="message" class="block text-sm font-semibold leading-6 text-gray-900">Message</label>
+                <div class="mt-2.5">
+                  <textarea name="message" id="message" rows="4" class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="mt-10">
+              <button type="button" class="block w-full rounded-md bg-black px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">Send message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

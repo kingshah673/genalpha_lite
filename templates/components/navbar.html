@@ -1,0 +1,62 @@
+<nav x-data="{ mobileMenuOpen: false }" class="bg-white/80 backdrop-blur-md fixed w-full z-40 top-0 border-b border-gray-100">
+    <div class="container-custom">
+        <div class="flex justify-between items-center h-16">
+            <!-- Mobile menu button -->
+            <div class="flex items-center sm:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 focus:outline-none">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Logo -->
+            <div class="flex-shrink-0 flex items-center">
+                <a href="/" class="text-2xl font-bold tracking-tight text-gray-900">Brand<span class="text-primary-600">Store</span></a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                <a href="/" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                <a href="/shop/" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Shop</a>
+                <!-- Categories will be dynamic later -->
+                <a href="/shop/" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Men</a>
+                <a href="/shop/" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Women</a>
+            </div>
+
+            <!-- Icons -->
+            <div class="flex items-center">
+                <button type="button" class="p-2 text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Search</span>
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+
+                <button @click="$dispatch('toggle-cart')" type="button" class="ml-4 p-2 text-gray-400 hover:text-gray-500 relative group">
+                    <span class="sr-only">Cart</span>
+                    <svg class="h-6 w-6 group-hover:text-primary-600 transition-colors" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    {% if cart_item_count > 0 %}
+                    <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-primary-600 rounded-full"
+                          hx-get="/cart/count/" hx-trigger="cartUpdated from:body" hx-swap="outerHTML">
+                        {{ cart_item_count }}
+                    </span>
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="sm:hidden" x-show="mobileMenuOpen" @click.away="mobileMenuOpen = false" x-transition>
+        <div class="pt-2 pb-3 space-y-1">
+            <a href="/" class="bg-primary-50 border-primary-500 text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Home</a>
+            <a href="/shop/" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Shop</a>
+            <a href="/shop/" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Men</a>
+            <a href="/shop/" class="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium">Women</a>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}
+  About Us | BrandStore
+{% endblock %}
+
+{% block meta_description %}
+  Learn about BrandStore's mission to provide premium quality clothing with timeless design and sustainable practices.
+{% endblock %}
+
+{% block content %}
+  <div class="bg-white">
+    <!-- Hero section -->
+    <div class="relative bg-gray-900 py-24 sm:py-32">
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute inset-0 bg-gray-900 mix-blend-multiply"></div>
+      </div>
+      <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <h2 class="text-4xl font-bold tracking-tight text-white sm:text-6xl">We believe in quality over quantity</h2>
+          <p class="mt-6 text-lg leading-8 text-gray-300">BrandStore was founded on the principle that clothing should be timeless, durable, and ethically produced. We don't chase trends; we set standards.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content section -->
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32">
+      <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+        <div>
+          <h3 class="text-3xl font-bold tracking-tight text-gray-900">Our Mission</h3>
+          <p class="mt-4 text-base leading-7 text-gray-600">To provide premium quality clothing that empowers individuals to look and feel their best, while maintaining the highest standards of sustainability and ethical manufacturing.</p>
+          <div class="mt-10">
+            <h3 class="text-3xl font-bold tracking-tight text-gray-900">Sustainability</h3>
+            <p class="mt-4 text-base leading-7 text-gray-600">We are committed to reducing our environmental footprint. From sourcing organic cotton to using recycled packaging, every decision is made with the planet in mind.</p>
+          </div>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2830&q=80&blend=111827&sat=-100&blend-mode=multiply" alt="" class="aspect-[16/9] w-full rounded-2xl bg-gray-50 object-cover lg:aspect-[4/3]" />
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
