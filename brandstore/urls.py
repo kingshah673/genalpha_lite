@@ -18,6 +18,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# Admin Site Config
+admin.site.site_header = "GenAlpha Administration"
+admin.site.site_title = "GenAlpha Admin Portal"
+admin.site.index_title = "Welcome to GenAlpha Portal"
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
