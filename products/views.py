@@ -34,10 +34,13 @@ def product_detail(request, slug):
     """Product detail view"""
     product = get_object_or_404(Product, slug=slug, is_active=True)
     
-    # Get available variants
-    variants = product.variants.filter(is_available=True)
+    # Get available variants and valid combinations
+    variants = product.variants.filter(is_available=True, stock_quantity__gt=0)
     sizes = variants.values_list('size', flat=True).distinct()
     colors = variants.values_list('color', flat=True).distinct()
+    
+    # Create a list of valid color/size combinations for Alpine.js
+    valid_combinations = list(variants.values('color', 'size'))
     
     # Related products (same category, exclude current)
     related_products = Product.objects.filter(
@@ -50,6 +53,7 @@ def product_detail(request, slug):
         'variants': variants,
         'sizes': sizes,
         'colors': colors,
+        'valid_combinations': valid_combinations,
         'related_products': related_products,
     }
     return render(request, 'pages/product_detail.html', context)

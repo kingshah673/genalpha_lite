@@ -18,7 +18,10 @@ def cart_add(request):
     variant = None
     
     if size and color:
-        variant = get_object_or_404(ProductVariant, product=product, size=size, color=color)
+        variant = ProductVariant.objects.filter(product=product, size=size, color=color).first()
+        if not variant:
+            # If variant doesn't exist, return an error partial or just a message
+            return HttpResponse("This combination is currently unavailable.", status=400)
     
     cart.add(product=product, quantity=quantity, variant=variant)
     
