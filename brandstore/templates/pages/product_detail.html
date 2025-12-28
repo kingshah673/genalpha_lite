@@ -1,12 +1,12 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 
-{% block title %}{{ product.name }} | BrandStore{% endblock %}
+{% block title %}{{ product.name }} | GenAlpha{% endblock %}
 
 {% block meta_description %}{{ product.description|truncatewords:25 }}{% endblock %}
 
 {% block extra_head %}
-<meta property="og:title" content="{{ product.name }} | BrandStore">
+<meta property="og:title" content="{{ product.name }} | GenAlpha">
 <meta property="og:description" content="{{ product.description|truncatewords:25 }}">
 {% if product.images.exists %}
 <meta property="og:image" content="{{ product.images.first.image.url }}">

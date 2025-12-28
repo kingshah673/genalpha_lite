@@ -1,6 +1,6 @@
-# BrandStore - Premium Clothing E-Commerce
+# GenAlpha - Premium Clothing E-Commerce
 
-**BrandStore** is a fully functional, premium clothing e-commerce web application built with **Django** (Backend) and **Tailwind CSS** (Frontend). It features a modern, responsive design, a session-based cart with HTMX-powered updates, a comprehensive admin dashboard, and a robust PostgreSQL database integration.
+**GenAlpha** is a fully functional, premium clothing e-commerce web application built with **Django** (Backend) and **Tailwind CSS** (Frontend). It features a modern, responsive design, a session-based cart with HTMX-powered updates, a comprehensive admin dashboard, and a robust PostgreSQL database integration.
 
 ---
 
