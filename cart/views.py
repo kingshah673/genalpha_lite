@@ -22,9 +22,10 @@ def cart_add(request):
     
     cart.add(product=product, quantity=quantity, variant=variant)
     
-    # Return updated cart drawer content
-    context = {'cart': cart}
-    return render(request, 'components/cart_drawer_content.html', context)
+    # Return updated cart drawer content with trigger for navbar count
+    response = render(request, 'components/cart_drawer_content.html', {'cart': cart})
+    response['HX-Trigger'] = 'cartUpdated'
+    return response
 
 @require_POST
 def cart_remove(request):
@@ -35,8 +36,9 @@ def cart_remove(request):
     
     cart.remove(product_id=product_id, variant_id=variant_id)
     
-    context = {'cart': cart}
-    return render(request, 'components/cart_drawer_content.html', context)
+    response = render(request, 'components/cart_drawer_content.html', {'cart': cart})
+    response['HX-Trigger'] = 'cartUpdated'
+    return response
 
 @require_POST
 def cart_update(request):
@@ -53,8 +55,9 @@ def cart_update(request):
         
     cart.add(product=product, quantity=quantity, variant=variant, update_quantity=True)
     
-    context = {'cart': cart}
-    return render(request, 'components/cart_drawer_content.html', context)
+    response = render(request, 'components/cart_drawer_content.html', {'cart': cart})
+    response['HX-Trigger'] = 'cartUpdated'
+    return response
 
 def cart_detail(request):
     """Full cart page"""

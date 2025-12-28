@@ -1,0 +1,15 @@
+{
+  "name": "genalpha_lite",
+  "version": "1.0.0",
+  "description": "**GenAlpha** is a fully functional, premium clothing e-commerce web application built with **Django** (Backend) and **Tailwind CSS** (Frontend). It features a modern, responsive design, a session-based cart with HTMX-powered updates, a comprehensive admin dashboard, and a robust PostgreSQL database integration.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

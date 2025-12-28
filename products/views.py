@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
 from .models import Product, Category, ProductVariant
+from django.db.models import Q
 
 def shop(request, category_slug=None):
     """Shop page view with filtering"""
@@ -51,3 +53,37 @@ def product_detail(request, slug):
         'related_products': related_products,
     }
     return render(request, 'pages/product_detail.html', context)
+
+def search(request):
+    """Full search results view"""
+    query = request.GET.get('q', '')
+    products = Product.objects.filter(is_active=True)
+    
+    if query:
+        products = products.filter(
+            Q(name__icontains=query) | 
+            Q(description__icontains=query) |
+            Q(category__name__icontains=query)
+        ).distinct()
+    
+    context = {
+        'products': products,
+        'query': query,
+        'categories': Category.objects.filter(is_active=True),
+    }
+    return render(request, 'pages/shop.html', context)
+
+def search_suggestions(request):
+    """Real-time search suggestions view (HTMX)"""
+    query = request.GET.get('q', '')
+    if len(query) < 2:
+        return HttpResponse('')
+        
+    products = Product.objects.filter(
+        is_active=True
+    ).filter(
+        Q(name__icontains=query) | 
+        Q(category__name__icontains=query)
+    ).distinct()[:5]
+    
+    return render(request, 'components/search_suggestions.html', {'products': products})

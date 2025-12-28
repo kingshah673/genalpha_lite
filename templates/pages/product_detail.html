@@ -71,7 +71,7 @@
                     </div>
                 </div>
 
-                <form class="mt-6" hx-post="/cart/add/" hx-target="#cart-drawer-content" hx-swap="innerHTML" @htmx:after-request="$dispatch('toggle-cart')">
+                <form class="mt-6" hx-post="/cart/add/" hx-target="#cart-drawer-content" hx-swap="innerHTML" @htmx:after-request="$dispatch('toggle-cart'); $dispatch('cartUpdated')">
                     {% csrf_token %}
                     <input type="hidden" name="product_id" value="{{ product.id }}">
                     

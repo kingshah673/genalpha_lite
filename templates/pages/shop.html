@@ -7,15 +7,32 @@
     <div class="container-custom py-16 sm:py-24">
         <div class="flex flex-col md:flex-row justify-between items-baseline border-b border-gray-200 pb-6 mb-10">
             <h1 class="text-4xl font-bold tracking-tight text-gray-900">
-                {% if category %}{{ category.name }}{% else %}All Products{% endif %}
+                {% if query %}
+                    Results for "{{ query }}"
+                {% elif category %}
+                    {{ category.name }}
+                {% else %}
+                    All Products
+                {% endif %}
             </h1>
 
-            <div class="flex items-center mt-4 md:mt-0">
+            <div class="flex items-center mt-4 md:mt-0 space-x-4">
+                <!-- Mobile Filter Button (visible only on mobile) -->
+                <div x-data="{ open: false }" class="lg:hidden">
+                    <button @click="$dispatch('toggle-filters')" type="button" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900">
+                        <span>Filters</span>
+                        <svg class="ml-1 h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Sort Dropdown -->
                 <div x-data="{ open: false }" class="relative inline-block text-left">
                     <div>
-                        <button @click="open = !open" @click.away="open = false" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" id="menu-button" aria-expanded="false" aria-haspopup="true">
+                        <button @click="open = !open" @click.away="open = false" type="button" class="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900" id="menu-button">
                             Sort
-                            <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <svg class="-mr-1 ml-1 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                             </svg>
                         </button>
@@ -28,33 +45,41 @@
                          x-transition:leave="transition ease-in duration-75"
                          x-transition:leave-start="transform opacity-100 scale-100"
                          x-transition:leave-end="transform opacity-0 scale-95"
-                         class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                        <div class="py-1" role="none">
-                            <a href="?sort=newest" class="text-gray-500 block px-4 py-2 text-sm {% if current_sort == 'newest' %}bg-gray-100 font-medium text-gray-900{% endif %}" role="menuitem">Newest</a>
-                            <a href="?sort=price_asc" class="text-gray-500 block px-4 py-2 text-sm {% if current_sort == 'price_asc' %}bg-gray-100 font-medium text-gray-900{% endif %}" role="menuitem">Price: Low to High</a>
-                            <a href="?sort=price_desc" class="text-gray-500 block px-4 py-2 text-sm {% if current_sort == 'price_desc' %}bg-gray-100 font-medium text-gray-900{% endif %}" role="menuitem">Price: High to Low</a>
+                         class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div class="py-1">
+                            <a href="?sort=newest" class="text-gray-500 block px-4 py-2 text-sm {% if current_sort == 'newest' %}bg-gray-100 font-medium text-gray-900{% endif %}">Newest</a>
+                            <a href="?sort=price_asc" class="text-gray-500 block px-4 py-2 text-sm {% if current_sort == 'price_asc' %}bg-gray-100 font-medium text-gray-900{% endif %}">Price: Low to High</a>
+                            <a href="?sort=price_desc" class="text-gray-500 block px-4 py-2 text-sm {% if current_sort == 'price_desc' %}bg-gray-100 font-medium text-gray-900{% endif %}">Price: High to Low</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <section aria-labelledby="products-heading" class="pb-24 pt-6">
+        <section aria-labelledby="products-heading" class="pb-24 pt-6" x-data="{ mobileFiltersOpen: false }" @toggle-filters.window="mobileFiltersOpen = !mobileFiltersOpen">
             <h2 id="products-heading" class="sr-only">Products</h2>
 
             <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
                 <!-- Filters -->
-                <form class="hidden lg:block lg:col-span-1">
+                <form class="lg:block lg:col-span-1" :class="mobileFiltersOpen ? 'block' : 'hidden'">
+                    <div class="flex items-center justify-between lg:hidden mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Filters</h3>
+                        <button @click="mobileFiltersOpen = false" type="button" class="text-gray-400 hover:text-gray-500">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
                     <h3 class="sr-only">Categories</h3>
                     <ul role="list" class="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
                         <li>
-                            <a href="{% url 'products:shop' %}" class="{% if not category %}text-primary-600 font-bold{% else %}hover:text-primary-600{% endif %}">
+                            <a href="{% url 'products:shop' %}" class="block {% if not category %}text-primary-600 font-bold{% else %}hover:text-primary-600{% endif %}">
                                 All Categories
                             </a>
                         </li>
                         {% for cat in categories %}
                         <li>
-                            <a href="{% url 'products:category' cat.slug %}" class="{% if category.id == cat.id %}text-primary-600 font-bold{% else %}hover:text-primary-600{% endif %}">
+                            <a href="{% url 'products:category' cat.slug %}" class="block {% if category.id == cat.id %}text-primary-600 font-bold{% else %}hover:text-primary-600{% endif %}">
                                 {{ cat.name }}
                             </a>
                         </li>
