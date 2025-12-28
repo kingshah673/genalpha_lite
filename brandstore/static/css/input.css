@@ -2,15 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+[x-cloak] {
+    display: none !important;
+}
+
+.htmx-indicator {
+    opacity: 0;
+    transition: opacity 200ms ease-in;
+}
+
+.htmx-request .htmx-indicator {
+    opacity: 1
+}
+
+.htmx-request.htmx-indicator {
+    opacity: 1
+}
+
 @layer components {
     .btn-primary {
-        @apply px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors duration-200 font-medium;
+        @apply px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors duration-200 font-medium inline-block text-center cursor-pointer;
     }
-    
+
     .btn-secondary {
-        @apply px-6 py-2 bg-white text-black border border-black rounded-md hover:bg-gray-50 transition-colors duration-200 font-medium;
+        @apply px-6 py-2 bg-white text-black border border-black rounded-md hover:bg-gray-50 transition-colors duration-200 font-medium inline-block text-center cursor-pointer;
     }
-    
+
     .container-custom {
         @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
     }

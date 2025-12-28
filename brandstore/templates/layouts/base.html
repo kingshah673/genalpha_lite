@@ -8,32 +8,7 @@
     <meta name="description" content="{% block meta_description %}Premium clothing for the modern lifestyle.{% endblock %}">
     
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                        },
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-            }
-        }
-    </script>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
     
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
@@ -45,26 +20,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style type="text/tailwindcss">
-        [x-cloak] { display: none !important; }
-        .htmx-indicator { opacity: 0; transition: opacity 200ms ease-in; }
-        .htmx-request .htmx-indicator { opacity: 1 }
-        .htmx-request.htmx-indicator { opacity: 1 }
-        
-        /* Custom Components */
-        @layer components {
-            .btn-primary {
-                @apply px-6 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition-colors duration-200 font-medium inline-block text-center cursor-pointer;
-            }
-            .btn-secondary {
-                @apply px-6 py-2 bg-white text-black border border-black rounded-md hover:bg-gray-50 transition-colors duration-200 font-medium inline-block text-center cursor-pointer;
-            }
-            .container-custom {
-                @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-            }
-        }
-    </style>
     
     {% block extra_head %}{% endblock %}
     <style>
